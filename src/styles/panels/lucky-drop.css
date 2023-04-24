@@ -1,0 +1,155 @@
+.ld-reward-container {
+    margin-top: 150px;
+}
+
+.ld-reward-head {
+    font-weight: bold;
+    font-size: 2.3rem;
+    background: linear-gradient(to right, #66ff00, #acd201, #23ef26, #15e889, #66ff00);
+    animation: moveBackground 4s linear infinite;
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.ld-reward-subhead {
+    font-weight: 300;
+}
+
+.ld-reward-description {
+    max-width: 70%;
+    margin-top: 20px;
+    color: var(--text-secondary);
+}
+
+.ld-button-view-rules {
+    margin-top: 20px;
+    padding: 7px 20px;
+    border-radius: 10px;
+    border: 1px solid #23ef26;
+    display: inline-block;
+    color: #23ef26;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.ld-button-view-rules:hover {
+    transform: scale(1.04);
+}
+
+.ld-button-view-rules:active {
+    transform: scale(.94);
+}
+
+.ld-card-container {
+    border-radius: 15px;
+    border: 1px solid var(--grey);
+}
+
+.ld-card-head {
+    padding: 15px;
+    border-bottom: 1px solid var(--grey);
+    text-align: start;
+    font-weight: bold;
+}
+
+.ld-card-body {
+    padding: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.ld-card-item-title {
+    color: var(--text-secondary);
+    font-weight: 300;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+}
+
+.ld-card-item-value {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.ld-second-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    gap: 15px;
+    justify-content: center;
+}
+
+.ld-cards-container {
+    display: inline-block;
+}
+
+.ld-buttons-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 15px;
+    margin-top: 10px;
+}
+
+.ld-buttons-box div,
+.ld-buttons-box a {
+    flex: 1;
+    border-radius: 10px;
+    padding: 8px 25px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.ld-buttons-box div:hover,
+.ld-buttons-box a:hover {
+    transform: scale(1.04);
+}
+
+.ld-buttons-box div:active,
+.ld-buttons-box a:active {
+    transform: scale(.94);
+}
+
+.ld-button-buy {
+    background: var(--connect-wallet-button-color);
+}
+
+.ld-button-view-rewards {
+    border: 1px solid var(--accent);
+    color: var(--accent);
+}
+
+.ld-table {
+    display: table;
+    width: 100%;
+}
+
+.ld-table-row {
+    display: table-row;
+}
+
+.ld-table-cell {
+    display: table-cell;
+}
+
+.ld-table-row,
+.ld-table-cell {
+    padding: 10px;
+}
+
+.ld-recent-players-tx-icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.ld-recent-players-date {
+    color: var(--text-secondary);
+    font-size: 0.73rem;
+}

@@ -1,0 +1,91 @@
+.earn-placeholder-head {
+    font-weight: bold;
+    font-size: 2.3rem;
+    margin-top: 150px;
+}
+
+.earn-placeholder-description {
+    color: var(--text-secondary);
+}
+
+.earn-card-container {
+    border-radius: 15px;
+    border: 1px solid var(--grey);
+}
+
+.earn-card-head {
+    padding: 15px;
+    border-bottom: 1px solid var(--grey);
+    text-align: start;
+    font-weight: bold;
+}
+
+.earn-card-body {
+    padding: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.earn-card-item-title {
+    color: var(--text-secondary);
+    font-weight: 300;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+}
+
+.earn-card-item-value {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.earn-second-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    gap: 15px;
+    justify-content: center;
+}
+
+.earn-cards-container {
+    display: inline-block;
+}
+
+.earn-buttons-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 15px;
+    margin-top: 10px;
+}
+
+.earn-buttons-box div {
+    flex: 1;
+    border-radius: 10px;
+    padding: 8px 25px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.earn-buttons-box div:hover {
+    transform: scale(1.04);
+}
+
+.earn-buttons-box div:active {
+    transform: scale(.94);
+}
+
+.earn-button-start-staking {
+    background: var(--connect-wallet-button-color);
+}
+
+.earn-button-claim-rewards {
+    border: 1px solid var(--accent);
+    color: var(--accent);
+}
+
+.earn-button-connect-wallet {
+    background: var(--connect-wallet-button-color);
+}

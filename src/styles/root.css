@@ -1,0 +1,62 @@
+body {
+    padding: 0;
+    margin: 0;
+    background: var(--content-background);
+}
+
+* {
+    color: #fff;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -ms-scrollbar-highlight-color: transparent;
+    -ms-high-contrast-adjust: none;
+    font-family: HarmonyOS, sans-serif;
+    transition: .3s all ease;
+}
+
+:root {
+    /* sizes */
+    --header-height: 76px;
+    --panel-padding: 20px;
+    /* colors */
+    --content-background: #050402;
+    --header-background: rgba(5, 4, 2, 0.5);
+    --accent: #b47d28;
+    --accent-10: rgba(136, 89, 16, 0.1);
+    --footer-divider-color: #0a0a0a;
+    --connect-wallet-button-color: linear-gradient(50deg, #d96d14, #a47215, #d07510);
+    --connected-wallet-button-color: linear-gradient(50deg, #69770e, #24730c, #5b850c);
+    --statistics-card-border: #251604;
+    --statistics-card-background: #170d02;
+    --text-secondary: #a4b0a2;
+    --grey: #282828;
+    --side-menu-background: rgba(12, 11, 9, 0.80);
+}
+
+a {
+    text-decoration: none;
+}
+
+@font-face {
+    font-family: HarmonyOS;
+    src: url("../fonts/HarmonyOS_Sans_Bold.ttf") format("truetype");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: HarmonyOS;
+    src: url("../fonts/HarmonyOS_Sans_Light.ttf") format("truetype");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: HarmonyOS;
+    src: url("../fonts/HarmonyOS_Sans_Medium.ttf") format("truetype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: HarmonyOS;
+    src: url("../fonts/HarmonyOS_Sans_Regular.ttf") format("truetype");
+    font-weight: normal;
+}
