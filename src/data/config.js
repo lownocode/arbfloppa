@@ -1,7 +1,7 @@
 export const config = {
-    projectName: "ARBFloppa",
-    footerProjectName: "Arbitrum FLOPPA",
-    contract: "0xF1A82bfA7fCEb8B8741e7E04a6B8EfD348cA6393",
+    projectName: "AIFLOPPA",
+    footerProjectName: "Arbitrum AI FLOPPA",
+    contract: "0xa70C1720c7Fcb5741BC81a45D3601923000098Db",
     links: {
         twitter: "https://twitter.com",
         discord: "https://discord.com",
