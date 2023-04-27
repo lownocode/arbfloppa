@@ -25,7 +25,8 @@
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "push-static": "npm run build && git checkout static && git add ./build && git commit -m \"new build\""
+    "push-static": "npm run build && git checkout static && git add ./build && git commit -m \"new build\"",
+    "deploy:prod": "npm run build && cd build && touch .nojekyll && git init && git remote add origin https://github.com/deknowny/aifloppa-prod-build && git add --all && git commit -m 'Deployed' && git push origin main -f && cd .."
   },
   "eslintConfig": {
     "extends": [
