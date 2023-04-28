@@ -1,8 +1,5 @@
 .home-preview {
-    height: calc(100vh - var(--header-height) - var(--panel-padding));
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 100px 0 150px 0;
 }
 
 .home-hexagon-logo {
@@ -70,6 +67,7 @@
     margin-top: 20px;
     color: var(--accent);
     user-select: text;
+    word-wrap: anywhere;
 }
 
 .home-whatis-buttons-container {
@@ -181,7 +179,6 @@
 
 .home-claim-container {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     row-gap: 15px;
     flex-wrap: wrap;

@@ -17,7 +17,7 @@ body {
 :root {
     /* sizes */
     --header-height: 76px;
-    --panel-padding: 20px;
+    --panel-padding: 35px;
     /* colors */
     --content-background: #050402;
     --header-background: rgba(5, 4, 2, 0.5);
@@ -31,6 +31,7 @@ body {
     --text-secondary: #a4b0a2;
     --grey: #282828;
     --side-menu-background: rgba(12, 11, 9, 0.80);
+    --snackbar-background: #0c0a08;
 }
 
 a {

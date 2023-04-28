@@ -64,9 +64,10 @@
 .lp-buttons-box div {
     flex: 1;
     border-radius: 10px;
-    padding: 8px;
+    padding: 8px 30px;
     text-align: center;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .lp-buttons-box div:hover {
