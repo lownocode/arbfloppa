@@ -1,8 +1,7 @@
 import React from "react"
 
 import "../styles/components/footer.css"
-import { socialNetworks } from "../data/socialNetworks"
-import { config } from "../data"
+import { config, socialNetworks } from "../data"
 
 export const Footer = () => {
     const renderSocialNetworks = socialNetworks.map((network, index) => {
