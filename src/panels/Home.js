@@ -1,4 +1,6 @@
 import React from "react"
+import { useSnackbar } from "react-simple-snackbar"
+import { useAccount } from "wagmi"
 
 import "../styles/panels/home.css"
 import { Panel, ProgressLine } from "../components"
@@ -34,7 +36,6 @@ const statisticsItems = [
         value: 8,
     },
 ]
-
 const cards = [
     {
         title: "AISHIB",
@@ -55,6 +56,15 @@ const cards = [
 ]
 
 export const Home = () => {
+    const { address, isConnected } = useAccount()
+    const [ openSnackbar ] = useSnackbar({
+            style: {
+                backgroundColor: "var(--snackbar-background)",
+                textAlign: "center",
+                borderRadius: 10
+            }
+        })
+
     const renderStatisticsItems = statisticsItems.map((item, index) => {
         return (
             <div
@@ -93,31 +103,44 @@ export const Home = () => {
         )
     })
 
+    const inviteFriends = async () => {
+        if (!isConnected) {
+            return openSnackbar("You need to connect wallet!")
+        }
+
+        const text = window.location.href + "?i=" + address
+
+        await navigator.clipboard.writeText(text)
+        openSnackbar("URL was copied to clipboard!")
+    }
+
+    const claimAirdrop = () => {
+        openSnackbar("Coming soon...")
+    }
+
     return (
         <Panel>
             <div className={"home-preview"}>
-                <div>
-                    <center>
-                        <div className={"home-hexagon-logo"}>
-                            <img
-                                src={floppa}
-                                alt={"floppa"}
-                                style={{ width: 50, height: 50 }}
-                            />
-                        </div>
-                    </center>
-                    <div style={{ height: 50 }} />
+                <center>
+                    <div className={"home-hexagon-logo"}>
+                        <img
+                            src={floppa}
+                            alt={"floppa"}
+                            style={{ width: 50, height: 50 }}
+                        />
+                    </div>
+                </center>
+                <div style={{ height: 50 }} />
 
-                    <center>
-                        <div className={"home-placeholder-head"}>
-                            Proudly Launch on Arbitrum
-                        </div>
+                <center>
+                    <div className={"home-placeholder-head"}>
+                        Proudly Launch on Arbitrum
+                    </div>
 
-                        <div className={"home-placeholder-description"}>
-                            Co-built by AI creatures and our community
-                        </div>
-                    </center>
-                </div>
+                    <div className={"home-placeholder-description"}>
+                        Co-built by AI creatures and our community
+                    </div>
+                </center>
             </div>
 
             <div className={"home-claim-container"}>
@@ -141,7 +164,7 @@ export const Home = () => {
                                 Received
                             </div>
                             <div>
-                                210,000,000,000,000,000
+                                210,000T
                             </div>
                         </div>
 
@@ -161,11 +184,17 @@ export const Home = () => {
                     </div>
 
                     <div className={"home-claim-buttons-container"}>
-                        <div className={"home-claim-button"}>
+                        <div
+                            className={"home-claim-button"}
+                            onClick={() => claimAirdrop()}
+                        >
                             Claim Airdrop
                         </div>
                         <div style={{ width: 10 }} />
-                        <div className={"home-claim-button"}>
+                        <div
+                            className={"home-claim-button"}
+                            onClick={() => inviteFriends()}
+                        >
                             Invite Friends
                         </div>
                     </div>
