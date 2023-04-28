@@ -126,6 +126,34 @@ export const LuckyDrop = () => {
         )
     })
 
+    /* TODO remove return on next line */
+    return (
+        <Panel>
+            <div
+                style={{
+                    textAlign: "center",
+                    marginTop: 100
+                }}
+            >
+                <div
+                    style={{
+                        fontWeight: "bold",
+                        fontSize: "1.7rem"
+                    }}
+                >
+                    We are actively working on it
+                </div>
+                <div
+                    style={{
+                        color: "var(--text-secondary)"
+                    }}
+                >
+                    Coming soon...
+                </div>
+            </div>
+        </Panel>
+    )
+
     return (
         <Panel>
             <center>
