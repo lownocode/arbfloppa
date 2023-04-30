@@ -246,6 +246,9 @@
     display: flex;
     align-items: center;
     margin-top: 10px;
+    flex-wrap: wrap;
+    white-space: nowrap;
+    gap: 10px;
 }
 
 .home-claim-button {
@@ -253,7 +256,7 @@
     text-align: center;
     background: #110d06;
     border-radius: 10px;
-    padding: 10px 10px;
+    padding: 10px 15px;
     cursor: pointer;
 }
 
