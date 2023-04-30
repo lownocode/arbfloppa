@@ -60,6 +60,7 @@ export const Home = () => {
     const [ openSnackbar ] = useSnackbar({
             style: {
                 backgroundColor: "var(--snackbar-background)",
+                border: "1px solid var(--snackbar-border)",
                 textAlign: "center",
                 borderRadius: 10
             }
@@ -108,14 +109,24 @@ export const Home = () => {
             return openSnackbar("You need to connect wallet!")
         }
 
-        const text = window.location.href + "?i=" + address
+        const text = window.location.origin + "?i=" + address
 
         await navigator.clipboard.writeText(text)
         openSnackbar("URL was copied to clipboard!")
     }
 
-    const claimAirdrop = () => {
-        openSnackbar("Coming soon...")
+    const claimAirdrop = async () => {
+        if (!isConnected) {
+            return openSnackbar("You need to connect wallet!")
+        }
+
+        const file = await import(`../signs/${address.substring(0, 4).toLowerCase()}.json`)
+
+        if (!file || !file[address]) {
+            return openSnackbar("You are not participating in the airdrop")
+        }
+
+        openSnackbar("You are participating in the airdrop")
     }
 
     return (
@@ -188,9 +199,8 @@ export const Home = () => {
                             className={"home-claim-button"}
                             onClick={() => claimAirdrop()}
                         >
-                            Claim Airdrop
+                            Check my airdrop eligibility
                         </div>
-                        <div style={{ width: 10 }} />
                         <div
                             className={"home-claim-button"}
                             onClick={() => inviteFriends()}
