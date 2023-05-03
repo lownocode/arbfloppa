@@ -1,6 +1,7 @@
 import AIFLOPPAToken from "../abi/AIFLOPPAToken.abi.json";
 import AIFLOPPABonusPool from "../abi/AIFLOPPABonusPool.abi.json";
 import DistributionPool from "../abi/DistributionPool.abi.json";
+import NitroPool from "../abi/NitroPool.abi.json";
 
 
 export const AIFLOPPATokenContract = {
@@ -14,4 +15,9 @@ export const AIFLOPPABonusPoolContract = {
 export const DistributionPoolContract = {
     address: "0xC1054Cdc00A374B0af435607b6342Ef52EFc25F6",
     abi: DistributionPool
+}
+
+export const NitroPoolContract = {
+    address: "0x30E1dCED3F3E0d31793C0b72d73df9446013DcC1",
+    abi: NitroPool
 }

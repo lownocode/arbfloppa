@@ -5,27 +5,41 @@ import { Panel } from "../components"
 import { config } from "../data"
 import floppa from "../assets/floppa.png"
 import { Arbitrum, Ethereum } from "../assets/icons"
+import { ethers } from "ethers"
+import { useAccount, useContractRead } from "wagmi";
+import { NitroPoolContract } from "../data/contracts"
 
 const cardItems = [
     {
         title: "TVL",
-        value: "$1,313,064.248"
+        value: "$-"
     },
     {
         title: "APY",
-        value: "13,258.07 %"
+        value: "- %"
     },
     {
         title: "Pending Rewards",
-        value: "12,783.419 ARB"
+        value: "- ARB"
     },
     {
         title: "Issued Rewards",
-        value: "169,347.217 ARB"
+        value: "- ARB"
     },
 ]
 
 export const LP = () => {
+    const account = useAccount();
+    const pendingRewardsData = useContractRead({
+        ...NitroPoolContract,
+        functionName: "pendingRewards",
+        watch: true,
+        args: [account.address]
+    })
+    console.log("PR", pendingRewardsData)
+    const pendingRewards = pendingRewardsData.data[0] ?? ethers.BigNumber.from(0)
+
+
     const renderCardItems = cardItems.map(({ title, value }) => {
         return (
             <div key={title}>
@@ -92,7 +106,7 @@ export const LP = () => {
                                     <div style={{ height: 15 }} />
 
                                     <b>
-                                        $0.000
+                                        $-
                                     </b>
 
                                     <div style={{ height: 15 }} />
@@ -132,7 +146,15 @@ export const LP = () => {
                                     <div style={{ height: 15 }} />
 
                                     <b>
-                                        0.000 ARB
+                                        {
+                                            ethers.utils.formatUnits(
+                                                pendingRewards.div(
+                                                    ethers.BigNumber.from(10).pow(15)
+                                                ).mul(
+                                                    ethers.BigNumber.from(10).pow(15)
+                                                ), 18
+                                            )
+                                        } ARB
                                     </b>
 
                                     <div style={{ height: 15 }} />

@@ -1,6 +1,6 @@
 import React from "react"
 import { useSnackbar } from "react-simple-snackbar"
-import { useAccount } from "wagmi"
+import { useAccount, useContractRead } from "wagmi"
 
 import "../styles/panels/home.css"
 import { Panel, ProgressLine } from "../components"
@@ -9,33 +9,10 @@ import floppa from "../assets/floppa.png"
 import pepe2 from "../assets/pepe2.png"
 import card1 from "../assets/card_1.png"
 import chart from "../assets/chart.svg"
+import { AIFLOPPATokenContract } from "../data/contracts"
+import { ethers } from "ethers"
 
-const statisticsItems = [
-    {
-        name: "AISHIB Total Supply",
-        value: 20202002,
-    },
-    {
-        name: "AISHIB Currency Supply",
-        value: 20202002,
-    },
-    {
-        name: "AISHIB Total Burn",
-        value: 0,
-    },
-    {
-        name: "AISHIB Trading Volume",
-        value: 20202002,
-    },
-    {
-        name: "Lucky Drop Reward $ARB",
-        value: 5,
-    },
-    {
-        name: "AISHIB Accumulated $ARB",
-        value: 8,
-    },
-]
+
 const cards = [
     {
         title: "AISHIB",
@@ -56,6 +33,39 @@ const cards = [
 ]
 
 export const Home = () => {
+    const totalBurnedData = useContractRead({
+        ...AIFLOPPATokenContract,
+        functionName: "balanceOf",
+        args: [ethers.constants.AddressZero]
+    })
+    const totalBurned = totalBurnedData.data[0] ?? ethers.BigNumber.from(0)
+    const statisticsItems = [
+        {
+            name: "AISHIB Total Supply",
+            value: "210,000T",
+        },
+        {
+            name: "AISHIB Total Burn",
+            value: ethers.utils.formatUnits(
+                totalBurned.div(
+                    ethers.BigNumber.from(10).pow(6)
+                ),
+                0
+            ),
+        },
+        {
+            name: "AISHIB Trading Volume",
+            value: "-",
+        },
+        {
+            name: "Lucky Drop Reward $ARB",
+            value: "-",
+        },
+        {
+            name: "AISHIB Accumulated $ARB",
+            value: "-",
+        },
+    ]
     const { address, isConnected } = useAccount()
     const [ openSnackbar ] = useSnackbar({
             style: {
@@ -182,7 +192,7 @@ export const Home = () => {
                         <ProgressLine percent={15} />
 
                         <div className={"home-claim-second-part-time"}>
-                            2023.04.15 09:00 (UTC+0) - 2023.05.15 09:00 (UTC+0)
+                            2023.05.04 09:00 (UTC+0) - 2023.06.04 09:00 (UTC+0)
                         </div>
                     </div>
 

@@ -1,22 +1,38 @@
 import React from "react"
 
+import { useAccount, useContractRead } from "wagmi";
+
 import "../styles/panels/earn.css"
 import { Panel } from "../components"
 import { config } from "../data"
+import { ethers } from "ethers";
 import floppa from "../assets/floppa.png"
+import { AIFLOPPABonusPoolContract } from "../data/contracts";
 
 const cardItems = [
     {
         title: "Current Staking",
-        value: "25,962,930,464,540,949.618 AISHIB"
+        value: "- AIFLOPPA"
     },
     {
         title: "APY",
-        value: "321.07 %"
+        value: "- %"
     },
 ]
 
 export const Earn = () => {
+    const account = useAccount();
+    const stakingView = useContractRead({
+        ...AIFLOPPABonusPoolContract,
+        functionName: "getUserViews",
+        args: [account.address]
+    })
+    const mainView = stakingView.data[0] ?? {
+        stakedAmount: ethers.BigNumber.from(0),
+        unclaimedRewards: ethers.BigNumber.from(0)
+    };
+    console.log("ST", stakingView)
+
     const renderCardItems = cardItems.map(({ title, value }) => {
         return (
             <div key={title}>
@@ -73,14 +89,18 @@ export const Earn = () => {
                                     <div style={{ height: 15 }} />
 
                                     <b>
-                                        0.000 {config.tokenName}
+                                        {
+                                            mainView["stakedAmount"].div(
+                                                ethers.BigNumber.from(10).pow(6)
+                                            ).toString()
+                                        } {config.tokenName}
                                     </b>
 
                                     <div style={{ height: 15 }} />
 
                                     <div className={"earn-buttons-box"}>
                                         <div className={"earn-button-start-staking"}>
-                                            Start Staking
+                                            Stake
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +125,11 @@ export const Earn = () => {
                                     <div style={{ height: 15 }} />
 
                                     <b>
-                                        0.000 {config.tokenName}
+                                        {
+                                            mainView["unclaimedRewards"].div(
+                                                ethers.BigNumber.from(10).pow(6)
+                                            ).toString()
+                                        } {config.tokenName}
                                     </b>
 
                                     <div style={{ height: 15 }} />
