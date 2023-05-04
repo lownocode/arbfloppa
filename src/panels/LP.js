@@ -1,12 +1,12 @@
 import React from "react"
+import { ethers } from "ethers"
+import { useAccount, useContractRead } from "wagmi"
 
 import "../styles/panels/lp.css"
 import { Panel } from "../components"
 import { config } from "../data"
 import floppa from "../assets/floppa.png"
 import { Arbitrum, Ethereum } from "../assets/icons"
-import { ethers } from "ethers"
-import { useAccount, useContractRead } from "wagmi";
 import { NitroPoolContract } from "../data/contracts"
 
 const cardItems = [
@@ -29,15 +29,14 @@ const cardItems = [
 ]
 
 export const LP = () => {
-    const account = useAccount();
+    const account = useAccount()
     const pendingRewardsData = useContractRead({
         ...NitroPoolContract,
         functionName: "pendingRewards",
         watch: true,
         args: [account.address]
     })
-    console.log("PR", pendingRewardsData)
-    const pendingRewards = pendingRewardsData.data[0] ?? ethers.BigNumber.from(0)
+    const pendingRewards = pendingRewardsData?.data?.[0] ?? ethers.BigNumber.from(0)
 
 
     const renderCardItems = cardItems.map(({ title, value }) => {
@@ -112,13 +111,21 @@ export const LP = () => {
                                     <div style={{ height: 15 }} />
 
                                     <div className={"lp-buttons-box"}>
-                                        <div className={"lp-button-start-staking"}>
-                                            Start Staking
-                                        </div>
+                                        <a
+                                            className={"lp-button-start-staking"}
+                                            target={"_blank"}
+                                            href={config.links.lpProcessingURL}
+                                        >
+                                            Add LP
+                                        </a>
 
-                                        <div className={"lp-button-remove-lp"}>
+                                        <a
+                                            className={"lp-button-remove-lp"}
+                                            target={"_blank"}
+                                            href={config.links.lpProcessingURL}
+                                        >
                                             Remove LP
-                                        </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -160,9 +167,13 @@ export const LP = () => {
                                     <div style={{ height: 15 }} />
 
                                     <div className={"lp-buttons-box"}>
-                                        <div className={"lp-button-connect-wallet"}>
-                                            Connect Wallet
-                                        </div>
+                                        <a
+                                            className={"lp-button-connect-wallet"}
+                                            target={"_blank"}
+                                            href={config.links.lpProcessingURL}
+                                        >
+                                            Harvest
+                                        </a>
                                     </div>
                                 </div>
                             </div>
