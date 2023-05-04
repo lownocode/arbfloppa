@@ -1,13 +1,13 @@
-import React from "react"
-
-import { useAccount, useContractRead } from "wagmi";
+import React, { useState } from "react"
+import { useAccount, useContractRead, usePrepareContractWrite } from "wagmi"
+import { ethers } from "ethers"
 
 import "../styles/panels/earn.css"
 import { Panel } from "../components"
 import { config } from "../data"
-import { ethers } from "ethers";
 import floppa from "../assets/floppa.png"
-import { AIFLOPPABonusPoolContract } from "../data/contracts";
+import { AIFLOPPABonusPoolContract, AIFLOPPATokenContract } from "../data/contracts"
+import { StakeModal } from "../modals/StakeModal"
 
 const cardItems = [
     {
@@ -21,17 +21,18 @@ const cardItems = [
 ]
 
 export const Earn = () => {
-    const account = useAccount();
+    const [ isOpenStakeModal, setOpenStakeModal ] = useState(false)
+
+    const account = useAccount()
     const stakingView = useContractRead({
         ...AIFLOPPABonusPoolContract,
         functionName: "getUserViews",
         args: [account.address]
     })
-    const mainView = stakingView.data[0] ?? {
+    const mainView = stakingView?.data?.[0] ?? {
         stakedAmount: ethers.BigNumber.from(0),
         unclaimedRewards: ethers.BigNumber.from(0)
-    };
-    console.log("ST", stakingView)
+    }
 
     const renderCardItems = cardItems.map(({ title, value }) => {
         return (
@@ -48,6 +49,11 @@ export const Earn = () => {
 
     return (
         <Panel>
+            <StakeModal
+                isOpen={isOpenStakeModal}
+                onClose={() => setOpenStakeModal(!isOpenStakeModal)}
+            />
+
             <center>
                 <div className={"earn-placeholder-head"}>
                     Staking to Earn {config.tokenName}
@@ -99,7 +105,10 @@ export const Earn = () => {
                                     <div style={{ height: 15 }} />
 
                                     <div className={"earn-buttons-box"}>
-                                        <div className={"earn-button-start-staking"}>
+                                        <div
+                                            className={"earn-button-start-staking"}
+                                            onClick={() => setOpenStakeModal(true)}
+                                        >
                                             Stake
                                         </div>
                                     </div>

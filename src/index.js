@@ -6,6 +6,7 @@ import { Web3Modal } from "@web3modal/react"
 import { EthereumClient, w3mConnectors, w3mProvider } from "@web3modal/ethereum"
 import { WagmiConfig, createClient, configureChains } from "wagmi"
 import { arbitrum, mainnet } from "wagmi/chains"
+import Modal from "react-modal"
 
 import "./styles/root.css"
 import { routes } from "./data/routes"
@@ -34,6 +35,7 @@ const ethereumClient = new EthereumClient(wagmiClient, chains)
 const root = ReactDOM.createRoot(document.getElementById("root"))
 const router = createBrowserRouter(routes)
 
+Modal.setAppElement("#root")
 root.render(
     <React.StrictMode>
         <SnackbarProvider>

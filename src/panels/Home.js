@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useState } from "react"
 import { useSnackbar } from "react-simple-snackbar"
 import { useAccount, useContractRead } from "wagmi"
+import { ethers } from "ethers"
 
 import "../styles/panels/home.css"
 import { Panel, ProgressLine } from "../components"
@@ -10,12 +11,11 @@ import pepe2 from "../assets/pepe2.png"
 import card1 from "../assets/card_1.png"
 import chart from "../assets/chart.svg"
 import { AIFLOPPATokenContract } from "../data/contracts"
-import { ethers } from "ethers"
 
 
 const cards = [
     {
-        title: "AISHIB",
+        title: config.tokenName,
         image: card1
     },
     {
@@ -27,25 +27,27 @@ const cards = [
         image: card1
     },
     {
-        title: "AISHIB Vault",
+        title: `${config.tokenName} Vault`,
         image: card1
     }
 ]
 
 export const Home = () => {
+    const [ claimAirdropData, setClaimAirdropData ] = useState(null)
+
     const totalBurnedData = useContractRead({
         ...AIFLOPPATokenContract,
         functionName: "balanceOf",
         args: [ethers.constants.AddressZero]
     })
-    const totalBurned = totalBurnedData.data[0] ?? ethers.BigNumber.from(0)
+    const totalBurned = totalBurnedData?.data?.[0] ?? ethers.BigNumber.from(0)
     const statisticsItems = [
         {
-            name: "AISHIB Total Supply",
+            name: `${config.tokenName} Total Supply`,
             value: "210,000T",
         },
         {
-            name: "AISHIB Total Burn",
+            name: `${config.tokenName} Total Burn`,
             value: ethers.utils.formatUnits(
                 totalBurned.div(
                     ethers.BigNumber.from(10).pow(6)
@@ -54,7 +56,7 @@ export const Home = () => {
             ),
         },
         {
-            name: "AISHIB Trading Volume",
+            name: `${config.tokenName} Trading Volume`,
             value: "-",
         },
         {
@@ -62,7 +64,7 @@ export const Home = () => {
             value: "-",
         },
         {
-            name: "AISHIB Accumulated $ARB",
+            name: `${config.tokenName} Accumulated $ARB`,
             value: "-",
         },
     ]
@@ -91,7 +93,6 @@ export const Home = () => {
             </div>
         )
     })
-
     const renderCards = cards.map((card, index) => {
         return (
             <div
@@ -107,7 +108,7 @@ export const Home = () => {
                         {card.title}
                     </div>
                     <div className={"home-card-title-subhead"}>
-                        Commin soon...
+                        Coming soon...
                     </div>
                 </div>
             </div>
@@ -125,18 +126,26 @@ export const Home = () => {
         openSnackbar("URL was copied to clipboard!")
     }
 
-    const claimAirdrop = async () => {
+    const checkAirdropEligibility = async () => {
         if (!isConnected) {
             return openSnackbar("You need to connect wallet!")
         }
 
         const file = await import(`../signs/${address.substring(0, 4).toLowerCase()}.json`)
 
+        // TODO drop next line
+        // setClaimAirdropData(file["0xDf56583C936d7fEceA991Dc6FC5e3788d2eB3417"])
+
         if (!file || !file[address]) {
             return openSnackbar("You are not participating in the airdrop")
         }
 
+        setClaimAirdropData(file[address])
         openSnackbar("You are participating in the airdrop")
+    }
+
+    const claimAirdrop = () => {
+        /* TODO */
     }
 
     return (
@@ -207,9 +216,11 @@ export const Home = () => {
                     <div className={"home-claim-buttons-container"}>
                         <div
                             className={"home-claim-button"}
-                            onClick={() => claimAirdrop()}
+                            onClick={() => claimAirdropData ? claimAirdrop() : checkAirdropEligibility()}
                         >
-                            Check my airdrop eligibility
+                            {
+                                claimAirdropData ? "Claim Airdrop" : "Check my airdrop eligibility"
+                            }
                         </div>
                         <div
                             className={"home-claim-button"}
