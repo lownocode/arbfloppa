@@ -161,7 +161,12 @@ export const Home = () => {
         ]
     })
     const claimWriter = useContractWrite(claimConfig.config)
-    useWaitForTransaction({ hash: claimWriter.data?.hash })
+    useWaitForTransaction({
+        hash: claimWriter.data?.hash,
+        onSuccess() {
+            openSnackbar("Airdrop is successfully claimed!")
+        }
+    })
 
     const claimAirdrop = claimWriter.write ?? (() => {
         console.error("Hooks are not ready yet.")
