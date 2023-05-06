@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { ethers } from "ethers"
 import { useAccount, useContractRead } from "wagmi"
+import { useWeb3Modal } from "@web3modal/react"
 
 import "../styles/modals/stake-modal.css"
 import { Modal } from "../components"
@@ -15,12 +16,19 @@ export const StakeModal = (props) => {
         ...AIFLOPPATokenContract,
         functionName: "balanceOf",
         args: [account.address]
-    })?.data?.div(ethers.BigNumber.from(10).pow(6))?.toString() || "-"
+    })?.data?.div(ethers.BigNumber.from(10).pow(6))?.toString() || 0
+    const web3Modal = useWeb3Modal()
 
     const onChangeAmount = e => {
         if(!e.target.value.match(/^(\d+)?(\.)?(\d+)?$/)) return
 
         setAmount(e.target.value)
+    }
+
+    const approve = () => {
+        if (!account.isConnected) {
+            return web3Modal.open()
+        }
     }
 
     return (
@@ -57,16 +65,21 @@ export const StakeModal = (props) => {
                 </div>
             </div>
 
-            <a
-                className={"stake-modal-card-insufficient-balance"}
-                target={"_blank"}
-                href={config.links.buyToken}
-            >
-                Insufficient balance. Get {config.tokenName}
-            </a>
+            {
+                balance === "0" && (
+                    <a
+                        className={"stake-modal-card-insufficient-balance"}
+                        target={"_blank"}
+                        href={config.links.buyToken}
+                    >
+                        Insufficient balance. Get {config.tokenName}
+                    </a>
+                )
+            }
 
             <div
                 className={"stake-modal-button"}
+                onClick={() => approve()}
             >
                 Approve
             </div>

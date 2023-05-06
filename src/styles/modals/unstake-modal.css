@@ -1,0 +1,67 @@
+.unstake-modal-head {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.unstake-modal-card-container {
+    background: rgba(245, 211, 189, 0.03);
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+    font-size: .8rem;
+}
+
+.unstake-modal-card-divide {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.unstake-modal-card-divide input {
+    flex: 1;
+    height: 30px;
+    border: none;
+    outline: none;
+    background: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding-right: 10px;
+    width: 0;
+}
+
+.unstake-modal-card-divide input::placeholder {
+    color: var(--text-secondary)
+}
+
+.unstake-modal-card-max-button {
+    border-radius: 8px;
+    padding: 4px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #8a071e;
+    cursor: pointer;
+    text-align: center;
+}
+
+.unstake-modal-card-insufficient-balance {
+    font-size: .9rem;
+    margin-top: 10px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.unstake-modal-card-insufficient-balance:hover {
+    text-decoration: underline;
+}
+
+.unstake-modal-button {
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px 5px;
+    cursor: pointer;
+    background: var(--accent-10);
+    color: var(--accent);
+    margin-top: 20px;
+}

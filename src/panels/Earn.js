@@ -1,5 +1,6 @@
 import React, { useState } from "react"
-import { useAccount, useContractRead, usePrepareContractWrite } from "wagmi"
+import { useAccount, useContractRead } from "wagmi"
+import { useWeb3Modal } from "@web3modal/react"
 import { ethers } from "ethers"
 
 import "../styles/panels/earn.css"
@@ -7,7 +8,7 @@ import { Panel } from "../components"
 import { config } from "../data"
 import floppa from "../assets/floppa.png"
 import { AIFLOPPABonusPoolContract, AIFLOPPATokenContract } from "../data/contracts"
-import { StakeModal } from "../modals/StakeModal"
+import { UnstakeModal, StakeModal } from "../modals"
 
 const cardItems = [
     {
@@ -22,7 +23,9 @@ const cardItems = [
 
 export const Earn = () => {
     const [ isOpenStakeModal, setOpenStakeModal ] = useState(false)
+    const [ isOpenUnstakeModal, setOpenUnstakeModal ] = useState(false)
 
+    const web3Modal = useWeb3Modal()
     const account = useAccount()
     const stakingView = useContractRead({
         ...AIFLOPPABonusPoolContract,
@@ -47,11 +50,23 @@ export const Earn = () => {
         )
     })
 
+    const actionWithConnectedWallet = (callback) => {
+        if (!account.isConnected) {
+            return web3Modal.open()
+        }
+
+        callback()
+    }
+
     return (
         <Panel>
             <StakeModal
                 isOpen={isOpenStakeModal}
                 onClose={() => setOpenStakeModal(!isOpenStakeModal)}
+            />
+            <UnstakeModal
+                isOpen={isOpenUnstakeModal}
+                onClose={() => setOpenUnstakeModal(!isOpenUnstakeModal)}
             />
 
             <center>
@@ -106,10 +121,16 @@ export const Earn = () => {
 
                                     <div className={"earn-buttons-box"}>
                                         <div
-                                            className={"earn-button-start-staking"}
-                                            onClick={() => setOpenStakeModal(true)}
+                                            className={"earn-button-stake"}
+                                            onClick={() => actionWithConnectedWallet(() => setOpenStakeModal(true))}
                                         >
                                             Stake
+                                        </div>
+                                        <div
+                                            className={"earn-button-unstake"}
+                                            onClick={() => actionWithConnectedWallet(() => setOpenUnstakeModal(true))}
+                                        >
+                                            Unstake
                                         </div>
                                     </div>
                                 </div>

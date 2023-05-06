@@ -19,7 +19,7 @@
         padding: 15px;
         width: 430px;
         position: relative;
-        margin: 0 15px;
+        margin: 15px;
         outline: none;
         border: none;
     }
@@ -48,7 +48,7 @@
         padding: 15px;
         flex: 1;
         position: relative;
-        margin: 0 15px;
+        margin: 15px;
         outline: none;
         border: none;
     }
@@ -67,5 +67,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    .modal-overlay {
+        align-items: end;
     }
 }

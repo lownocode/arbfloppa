@@ -78,12 +78,16 @@
     transform: scale(.94);
 }
 
-.earn-button-start-staking {
+.earn-button-stake {
     background: var(--connect-wallet-button-color);
 }
 
+.earn-button-unstake {
+    background: var(--button-unstake-background);
+}
+
 .earn-button-claim-rewards {
-    border: 1px solid var(--accent);
+    border: 1px dashed var(--accent);
     color: var(--accent);
 }
 

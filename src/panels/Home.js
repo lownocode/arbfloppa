@@ -34,7 +34,7 @@ const cards = [
 
 export const Home = () => {
     const [ claimAirdropData, setClaimAirdropData ] = useState(null)
-    const [referrer, setReferrer] = useState();
+    const [ referrer, setReferrer ] = useState("")
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);

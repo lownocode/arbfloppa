@@ -35,6 +35,7 @@ body {
     --snackbar-border: #13100c;
     --modal-overlay-background: rgba(0, 0, 0, 0.45);
     --modal-container-background: rgba(9, 9, 7, 0.52);
+    --button-unstake-background: #100b06;
 }
 
 a {
