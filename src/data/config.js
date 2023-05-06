@@ -10,5 +10,6 @@ export const config = {
         lpProcessingURL: "https://example.com"
     },
     tokenName: "AIFLOPPA",
-    walletConnectProjectId: "f8f117d32eb6c0129e7f638aeda98c31"
+    walletConnectProjectId: "f8f117d32eb6c0129e7f638aeda98c31",
+    devWallet: "0xd09c66a548Cb947dAB9ceF26fbb19Dfb318F91D9"
 }

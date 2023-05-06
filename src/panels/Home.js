@@ -1,6 +1,6 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useSnackbar } from "react-simple-snackbar"
-import { useAccount, useContractRead } from "wagmi"
+import { useAccount, useContractRead, usePrepareContractWrite, useContractWrite, useWaitForTransaction } from "wagmi"
 import { ethers } from "ethers"
 
 import "../styles/panels/home.css"
@@ -10,7 +10,7 @@ import floppa from "../assets/floppa.png"
 import pepe2 from "../assets/pepe2.png"
 import card1 from "../assets/card_1.png"
 import chart from "../assets/chart.svg"
-import { AIFLOPPATokenContract } from "../data/contracts"
+import { AIFLOPPATokenContract, DistributionPoolContract } from "../data/contracts"
 
 
 const cards = [
@@ -34,6 +34,12 @@ const cards = [
 
 export const Home = () => {
     const [ claimAirdropData, setClaimAirdropData ] = useState(null)
+    const [referrer, setReferrer] = useState();
+
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        setReferrer(urlParams.get("i"))
+    })
 
     const totalBurnedData = useContractRead({
         ...AIFLOPPATokenContract,
@@ -144,9 +150,22 @@ export const Home = () => {
         openSnackbar("You are participating in the airdrop")
     }
 
-    const claimAirdrop = () => {
-        /* TODO */
-    }
+    // Claim aidrop writing
+    const claimConfig = usePrepareContractWrite({
+        ...DistributionPoolContract,
+        functionName: "claim",
+        args: [
+            claimAirdropData?.["nonce"],
+            claimAirdropData?.["sign"],
+            referrer ?? config.devWallet
+        ]
+    })
+    const claimWriter = useContractWrite(claimConfig.config)
+    useWaitForTransaction({ hash: claimWriter.data?.hash })
+
+    const claimAirdrop = claimWriter.write ?? (() => {
+        console.error("Hooks are not ready yet.")
+    })
 
     return (
         <Panel>
